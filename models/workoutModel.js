@@ -16,7 +16,7 @@ const workoutSchema = new mongoose.Schema({
         type: String,
         trim: true,
         maxlength: [40, 'A workout name must be less than or equal to 40 characters'],
-        minlength: [5, 'A workout name must be greater than or equal to 5 characters']
+        minlength: [2, 'A workout name must be greater than or equal to 2 characters']
     },
     duration: {
         type: Number,
@@ -34,10 +34,6 @@ const workoutSchema = new mongoose.Schema({
             message: 'Difficulty is either easy, medium or difficult'
         }
     },
-    activities: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Activity'
-    }],
     caloriesBurned: {
         type: Number,
         default: 0

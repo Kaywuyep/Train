@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train - Sign Up Form</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
+    <link rel="stylesheet" href="/css/signup.css">
+    <link rel="shortcut icon" href="/img/favicon.png" />
+    <script src="/js/script.js" defer></script>
+</head>
+<body>
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div class="row w-100 m-0">
+                <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+                    <div class="card col-lg-4 mx-auto">
+                        <div class="card-body px-5 py-5">
+                            <div class="wrapper">
+                                <div class="form-box signup">
+                                    <!--<div class="form-details">-->
+                                        <h2>Hello &#128522;, Welcome to Train &#128170;</h2>
+                                        <p>To become a part of our Amazing community, please sign up using your personal information.</p>
+                                    <!--</div>-->
+                                    <div class="form-content">
+                                        <div class="card-body px-3 py-3">
+                                            <!--<h2 class="mt-8">SIGNUP</h2>-->
+                                            <form action="/v1/api/users/signup" method="POST">
+                                                
+                                                <div class="input-field">
+                                                    <input type="text" name="username" required>
+                                                    <label>Enter your username</label>
+                                                </div>
+                                                <div class="input-field">
+                                                    <input type="text" name="email" required>
+                                                    <label>Enter your email</label>
+                                                </div>
+                                                <div class="input-field">
+                                                    <input type="text" name="phone" required>
+                                                    <label>Enter your phone number</label>
+                                                </div>
+                                                <div class="input-field">
+                                                    <input type="password" name="password" required minlength="8">
+                                                    <label>Create password</label>
+                                                </div>
+                                                <div class="input-field">
+                                                    <select name="roles" required>
+                                                        <option value="user">User</option>
+                                                        <option value="admin">Admin</option>
+                                                        <option value="trainer">Trainer</option>
+                                                    </select>
+                                                    <label class="mr-8">role</label>
+                                                </div>
+                                                <div class="policy-text">
+                                                    <input type="checkbox" id="policy" required>
+                                                    <label for="policy">
+                                                        I agree to the
+                                                        <a href="#" class="option">Terms & Conditions</a>
+                                                    </label>
+                                                    <p class="login mt-15">Already have an account? <a href="/v1/api/users/login">Login</a></p>
+                                                </div>
+                                                <button type="submit" class="btn btn-signup mb-4">Sign Up</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

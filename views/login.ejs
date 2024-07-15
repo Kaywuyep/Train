@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Train - Login Form</title>
+  <link rel="stylesheet" href="/css/login.css">
+  <link rel="shortcut icon" href="/img/favicon.png" />
+</head>
+<body>
+  <div class="wrapper">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h2 class="mb-0">Login</h2>
+      <!--<a href="/login" class="btn btn-primary">Back</a>-->
+  </div>
+  <form action="/v1/api/users/login" method="POST">
+      <!--<h2>Login</h2> -->
+      <div class="input-field">
+        <input type="text" name="email" required class="form-control p_input">
+        <label>Enter your email</label>
+      </div>
+      <div class="input-field">
+        <input type="password" name="password" required class="form-control p_input">
+        <label>Enter your password</label>
+      </div>
+      <div class="forget">
+        <label for="remember">
+          <input type="checkbox" id="remember">
+          <p>Remember me</p>
+        </label>
+        <a href="#">Forgot password?</a>
+      </div>
+      <button type="submit" class="btn btn-login mb-3" >Log In</button>
+      <div class="d-flex">
+        <button class="btn btn-facebook mr-2 col">
+          <i class="mdi mdi-facebook"></i> Facebook </button>
+        <button class="btn btn-google col">
+          <i class="mdi mdi-google-plus"></i> Google plus </button>
+      </div>
+      <div>
+        <p class="signup mt-6">Don't have an Account?<a href="/v1/api/users/signup"> Sign Up</a></p>
+      </div>
+    </form>
+  </div>
+  <script>
+    async function login(event) {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        const response = await fetch('/v1/api/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            localStorage.setItem('token', result.token); // Store token in localStorage
+            alert('Login successful');
+            window.location.href = '/dashboard'; // Redirect to dashboard or another page
+        } else {
+            alert('Error: ' + result.message);
+        }
+    }
+
+    document.getElementById('login-form').addEventListener('submit', login);
+</script>
+</body>
+</html>

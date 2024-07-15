@@ -3,11 +3,6 @@ const bcrypt = require("bcrypt")
 
 
 const userSchema = new mongoose.Schema({
-    fullName: {
-        type: String,
-        required: true,
-        trim: true
-    },
     username: {
         type: String,
         unique: true,
@@ -32,13 +27,13 @@ const userSchema = new mongoose.Schema({
     roles: {
         type: String,
         default: "user",
-        enum: ["user", "admin", "trainer"]
+        enum: ["user", "trainer"]
     },
     isAdmin: {
         type: Boolean,
         default: false,
       },
-    activityTracking: [
+    activityTrack: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Activity",
@@ -68,6 +63,7 @@ userSchema.pre("save", async function (next) {
   userSchema.methods.correctPassword = async function (candidatePassword) {
     return await bcrypt.compare(candidatePassword, this.password);
   };
+
 
 const Users = mongoose.model("Users", userSchema);
 

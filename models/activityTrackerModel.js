@@ -2,32 +2,29 @@
 const mongoose = require('mongoose');
 
 const activitySchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     type: {
         type: String,
         required: [true, 'An activity must have a type'],
         trim: true
     },
-    duration: {
+    durationPerWeek: {
         type: Number,
         required: [true, 'An activity must have a duration'],
     },
-    distance: {
+    repetitionsPerWeek: {
         type: Number,
         default: 0
     },
-    repetitions: {
+    startWeight: {
         type: Number,
         default: 0
     },
-    sets: {
-        type: Number,
-        default: 0
-    },
-    weight: {
-        type: Number,
-        default: 0
-    },
-    caloriesBurned: {
+    weightLost: {
         type: Number,
         default: 0
     },

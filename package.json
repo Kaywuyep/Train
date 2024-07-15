@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "lint": "ejs-lint views/dashboard.ejs"
   },
   "repository": {
     "type": "git",
@@ -19,13 +20,28 @@
   },
   "homepage": "https://github.com/Kaywuyep/Train#readme",
   "dependencies": {
+    "@mdi/font": "^7.4.47",
+    "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
+    "bootstrap": "^5.3.3",
+    "bootstrap-maxlength": "^1.10.1",
+    "chart.js": "^4.4.3",
+    "codemirror": "^6.0.1",
+    "connect-flash": "^0.1.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
     "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "flag-icon-css": "^4.1.7",
     "jest": "^29.7.0",
+    "jquery": "^3.7.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.3",
     "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "ejs-lint": "^2.0.0"
   }
 }

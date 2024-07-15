@@ -12,7 +12,7 @@ const {
 } = require('../controllers/workoutcController');
 
 workoutRouter.get('/', isLoggedIn, getWorkouts);
-workoutRouter.post('/new', isLoggedIn, isTrainer, createWorkout);
+workoutRouter.post('/new', isLoggedIn, createWorkout);
 workoutRouter.get('/:id', isLoggedIn, getWorkout);
 workoutRouter.put('/:id/update', isLoggedIn, isTrainer, updateWorkout);
 workoutRouter.delete('/:id/delete', isLoggedIn, isTrainer, deleteWorkout);

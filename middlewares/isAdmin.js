@@ -2,25 +2,30 @@ const isLoggedIn = require("./isLoggedIn");
 const User = require("../models/usermodel");
 
 const isAdmin = async (req, res, next) => {
-    try {
-        // First, check if the user is logged in
-        await isLoggedIn(req, res, async () => {
-            // Fetch the user based on the ID set in the isLoggedIn middleware
-            const user = await User.findById(req.userAuthId);
-            if (!user) {
-                return res.status(404).json({ message: "User not found" });
-            }
+  try {
+    // Call the isLoggedIn middleware to check for authentication first
+    await isLoggedIn(req, res, async () => {
+      // Inside the callback after successful authentication:
+      const userId = req.session.user && req.session.user.id?.toString(); // Access user ID
 
-            // Check if the user is an admin
-            if (user.roles !== "admin") {
-                return res.status(403).json({ message: "Access denied. Admin only" });
-            }
+      // Retrieve user based on the retrieved ID
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
 
-            next();
-        });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+      // Check if the user is an admin
+      if (user.roles !== "admin") {
+        return res.status(403).json({ message: "Access denied. Admin only" });
+      }
+
+      // User is logged in and an admin, proceed to the next middleware
+      next();
+    });
+  } catch (error) {
+    console.error(error); // Log the error for debugging
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 };
 
 module.exports = isAdmin;
