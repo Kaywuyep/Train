@@ -62,6 +62,28 @@ const getUserProfile = async (req, res) => {
     }
 };
 
+const profile = async (req, res) => {
+    try {
+        const workoutIds = req.session.user.workouts;
+        const workouts = await Workout.find({ _id: { $in: workoutIds } });
+        const activityIds = req.session.user.activities;
+        const activities = await Activity.find({ _id: { $in: activityIds } });
+
+        res.render('profile', {
+            workouts: workouts, 
+            activities: activities,
+            user: req.session.user.name,
+            roles: req.session.user.roles,
+            email: req.session.user.email,
+            phone: req.session.user.phone, 
+        });
+    } catch (error) {
+        console.log({message: "Error fetching profile"});
+        res.redirect('/v1/api/users/dashboard');
+    }
+};
+
+
 const registerUser = async (req, res) => {
     try {
         const { username, password, email } = req.body;
@@ -137,11 +159,13 @@ const loginUser = async (req, res) => {
             id: user._id,
             name: user.username,
             roles: user.roles,
+            email: user.email,
+            phone: user.phone,
             workouts: user.workoutTrack,
             activities: user.activityTrack
             };
             
-            console.log("Session User Object:", req.session.user);
+            //console.log("Session User Object:", req.session.user);
             res.redirect("/v1/api/users/dashboard");
         } else {
             res.redirect("/v1/api/users/login")
@@ -214,6 +238,7 @@ const logout = (req, res) => {
 
 module.exports = {
     dashboard,
+    profile,
     getUsers,
     getUserProfile,
     registerUser,

@@ -1,0 +1,28 @@
+.coming-soon-container {
+    position: relative;
+}
+
+.coming-soon-message {
+    font-size: 2rem;
+    margin: 20px;
+}
+
+.balloons {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    animation: float 5s ease-in-out infinite;
+}
+
+.gym-emoji {
+    font-size: 4rem;
+    margin-top: 20px;
+}
+
+@keyframes float {
+    0% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-20px); }
+    100% { transform: translateX(-50%) translateY(0); }
+}

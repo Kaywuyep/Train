@@ -13,7 +13,7 @@ const userRouter = require('./routes/userRoutes');
 const activityRouter = require('./routes/activityRoute');
 const workoutRouter = require('./routes/workoutRoute');
 
-//const oneDay = 24 * 60 * 60 * 1000;
+const oneDay = 24 * 60 * 60 * 1000;
 
 // Initialize express instance
 const app = express();   
@@ -47,8 +47,8 @@ app.use(session({
   secret: process.env.JWT_KEY, // Replace with a strong secret key
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false }
-  //cookie: { secure: false, httpOnly: true, maxAge: oneDay } // Set to true for production (HTTPS)
+  //cookie: { secure: false }
+  cookie: { secure: true, httpOnly: true, maxAge: oneDay } // Set to true for production (HTTPS)
 }));
 
 // Use routes

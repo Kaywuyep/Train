@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Train - WorkOut Plan</title>
+    <title>Train - Profile</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css">
@@ -23,7 +23,7 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="/css/style.css">
-    
+    <link rel="stylesheet" href="/css/profile.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="/img/favicon.png" />
   </head>
@@ -33,7 +33,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
           <a class="sidebar-brand brand-logo" href="#"><img src="/img/logo.png" alt="logo" /></a>
-          <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="/img/logo-mini.svg" alt="logo" /></a>
+          <a class="sidebar-brand brand-logo-mini" href="#"><img src="/img/logo-mini.svg" alt="logo" /></a>
         </div>
         <ul class="nav">
           <li class="nav-item profile">
@@ -44,11 +44,11 @@
                   <span class="count bg-success"></span>
                 </div>
                 <div class="profile-name">
-                  <h5 class="mb-0 font-weight-normal"> <%= user.username %></h5>
+                  <h5 class="mb-0 font-weight-normal"> <%= user %></h5>
                   <span> <%= roles %></span>
                 </div>
               </div>
-              <a href="/v1/api/users/comingSoon" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+              <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
               <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
                 <a href="/v1/api/users/comingSoon" class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
@@ -223,12 +223,12 @@
                 </div>
               </li>
               <li class="nav-item nav-settings d-none d-lg-block">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/v1/api/users/comingSoon">
                   <i class="mdi mdi-view-grid"></i>
                 </a>
               </li>
               <li class="nav-item dropdown border-left">
-                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="/v1/api/users/comingSoon" data-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                   <i class="mdi mdi-email"></i>
                   <span class="count bg-success"></span>
                 </a>
@@ -319,7 +319,7 @@
                 <a class="nav-link" id="profileDropdown" href="/v1/api/users/comingSoon" data-toggle="dropdown">
                   <div class="navbar-profile">
                     <img class="img-xs rounded-circle" src="/img/faces/face15.jpg" alt="">
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name"><%= user.username %></p>
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name"><%= user %></p>
                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                   </div>
                 </a>
@@ -371,64 +371,61 @@
                 </div>
               </div>
             </div>
-          
-            <div class="container">
-                <h1>Workout Plan</h1>
+
+            <div class="profile-container">
+                <div class="profile-header">User Profile</div>
+                <div class="profile-info">
+                    <p><strong>Username:</strong> <%= user %></p>
+                    <p><strong>Email:</strong> <%= email %></p>
+                    <p><strong>Phone:</strong> <%= phone %></p>
+                    <p><strong>Role:</strong> <%= roles %></p>
+                </div>
         
-                <form id="workout-form" action="/v1/api/workout/new" method="POST">
-                    <h2>Create New Workout Plan</h2>
-                    <label for="name">Workout Name</label>
-                    <input type="text" id="name" name="name" required>
-        
-                    <label for="duration">Duration (minutes)</label>
-                    <input type="number" id="duration" name="duration" required>
-        
-                    <label for="repetitions">Repetitions</label>
-                    <input type="number" id="repetitions" name="repetitions" required>
-        
-                    <label for="difficulty">Difficulty</label>
-                    <select id="difficulty" name="difficulty" required>
-                        <option value="easy">Easy</option>
-                        <option value="medium">Medium</option>
-                        <option value="difficult">Difficult</option>
-                    </select>
-        
-                    <label for="caloriesBurned">Calories Burned (Kg)</label>
-                    <input type="number" id="caloriesBurned" name="caloriesBurned">
-                
-                    <button type="submit">Add Workout</button>
-                </form>
-        
-                <div id="workouts-list">
-                    <h2>Workouts</h2>
-                    <% if (workouts && workouts.length > 0) { %>
-                    <ul id="workout-items">
-                        <% workouts.forEach(workout => { %>
-                          <li>
-                            <h2><%= workout.name %></h2>
-                            <p>Date: <%= workout.date %></p>
-                            <p>Duration: <%= workout.duration %> minutes</p>
-                            <p>Repetitions: <%= workout.repetitions %></p>
-                            <p>Difficulty: <%= workout.difficulty %></p>
-                            <p>Calories Burned: <%= workout.caloriesBurned %> kg</p>
-                          </li>
+                <div class="section-header">Workouts</div>
+                <% if (workouts && workouts.length > 0) { %>
+                    <ul class="list">
+                        <% workouts.forEach(function(workout) { %>
+                            <li class="list-item">
+                                <p><strong>Name:</strong> <%= workout.name %></p>
+                                <p><strong>Duration:</strong> <%= workout.duration %> mins</p>
+                                <p><strong>Difficulty:</strong> <%= workout.difficulty %></p>
+                            </li>
                         <% }); %>
                     </ul>
-                    <% } else { %>
-                        <p>No workouts created yet.</p>
-                      <% } %>
-                </div>
-            </div>
+                <% } else { %>
+                    <p>No workouts found.</p>
+                <% } %>
         
-          </div>
+                <div class="section-header">Activities</div>
+                <% if (activities && activities.length > 0) { %>
+                    <ul class="list">
+                        <% activities.forEach(function(activity) { %>
+                            <li class="list-item">
+                                <p><strong>Type:</strong> <%= activity.type %></p>
+                                <p><strong>Duration per Week:</strong> <%= activity.durationPerWeek %> mins</p>
+                                <p><strong>Repetitions per Week:</strong> <%= activity.repetitionsPerWeek %></p>
+                                <p><strong>Start Weight:</strong> <%= activity.startWeight %> kg</p>
+                                <p><strong>Weight Lost:</strong> <%= activity.weightLost %> kg</p>
+                                <p><strong>Notes:</strong> <%= activity.notes %></p>
+                            </li>
+                        <% }); %>
+                    </ul>
+                <% } else { %>
+                    <p>No activities found.</p>
+                <% } %>
+        
+                <a href="/v1/api/users/update" class="update-button">Update Profile</a>
+            </div>
+            
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
           <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
-              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">
-                Copyright &copy; 2024 The Train Fitness Co.</span>
+                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">
+                  Copyright &copy; 2024 The Train Fitness Co.
+                </span>
             </div>
-          </footer>
+        </footer>
           <!-- partial -->
         </div>
         <!-- main-panel ends -->
@@ -511,23 +508,6 @@
           carouselReview();
         }, 1000); 
       });
-    </script>
-    <script>
-        // Fetch and display workouts
-        async function fetchWorkouts() {
-            const response = await fetch('/workouts');
-            const workouts = await response.json();
-            const workoutItems = document.getElementById('workout-items');
-            workoutItems.innerHTML = '';
-            workouts.forEach(workout => {
-                const li = document.createElement('li');
-                li.textContent = `${workout.name} - ${workout.duration} mins - ${workout.difficulty}`;
-                workoutItems.appendChild(li);
-            });
-        }
-
-        // Initialize the page
-        window.onload = fetchWorkouts;
     </script>
   </body>
 </html>

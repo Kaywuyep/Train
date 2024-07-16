@@ -61,7 +61,7 @@
                   </div>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item preview-item">
+                <a href="/v1/api/users/comingSoon" class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
                     <div class="preview-icon bg-dark rounded-circle">
                       <i class="mdi mdi-onepassword  text-info"></i>
@@ -72,7 +72,7 @@
                   </div>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item preview-item">
+                <a href="/v1/api/users/comingSoon" class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
                     <div class="preview-icon bg-dark rounded-circle">
                       <i class="mdi mdi-calendar-today text-success"></i>
@@ -97,42 +97,42 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="#" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-icon">
-                <i class="mdi mdi-laptop"></i>
+                <i class="mdi mdi-dumbbell"></i>
               </span>
               <span class="menu-title">Basic Fitness</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="#">videos</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">images</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/v1/api/users/comingSoon">videos</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/v1/api/users/comingSoon">images</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item menu-items">
             <a class="nav-link" href="/v1/api/workout/:id">
               <span class="menu-icon">
-                <i class="mdi mdi-playlist-play"></i>
+                <i class="mdi mdi-weight"></i>
               </span>
               <span class="menu-title">WorkOut Plan</span>
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="/v1/api/users/comingSoon">
               <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
+                <i class="mdi mdi-silverware-fork-knife"></i>
               </span>
               <span class="menu-title">Diet Plan</span>
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="/v1/api/users/Profile">
               <span class="menu-icon">
-                <i class="mdi mdi-chart-bar"></i>
+                <i class="mdi mdi-account"></i>
               </span>
-              <span class="menu-title">WorkOut Statistics</span>
+              <span class="menu-title">Profile</span>
             </a>
           </li>
           <li class="nav-item menu-items">
@@ -153,7 +153,7 @@
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="#"> update account </a></li>
+                <li class="nav-item"> <a class="nav-link" href="/v1/api/users/comingSoon"> upgrade account </a></li>
                 <li class="nav-item"> <a class="nav-link" href="/v1/api/users/delete/:id"> delete account </a></li>
               </ul>
             </div>
@@ -181,7 +181,7 @@
             <ul class="navbar-nav navbar-nav-right">
               <li class="nav-item dropdown d-none d-lg-block">
                 <a class="nav-link btn btn-success create-new-button" href="/v1/api/workout/new" id="createbuttonDropdown" data-toggle="dropdown" aria-expanded="false" href="#">
-                   + Create New Activity plan
+                   + Create New Workout plan
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="createbuttonDropdown">
                   <h6 class="p-3 mb-0">Projects</h6>
@@ -228,7 +228,7 @@
                 </a>
               </li>
               <li class="nav-item dropdown border-left">
-                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="/v1/api/users/comingSoon" data-toggle="dropdown" aria-expanded="false">
                   <i class="mdi mdi-email"></i>
                   <span class="count bg-success"></span>
                 </a>
@@ -454,54 +454,52 @@
                 </div>
               </div>
             </div>
-          
             <div class="row">
               <div class="col-md-4 grid-margin stretch-card">
-                  <div class="card">
-                      <div class="card-body">
-                          <h4 class="card-title">Activity Log</h4>
-                          <% if (activities && activities.length > 0) { %>
-                              <% activities.forEach(function(activity) { %>
-                                  <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
-                                      <div class="text-md-center text-xl-left">
-                                          <h6 class="mb-1"><%= activity.type %></h6>
-                                          <p class="text-muted mb-0">Start Weight: <%= activity.startWeight %> kg</p>
-                                          <p class="text-muted mb-0">Weight Lost: <%= activity.weightLost %> kg</p>
-                                          <% if (activity.notes) { %>
-                                              <p class="text-muted mb-0">Notes: <%= activity.notes %></p>
-                                          <% } %>
-                                          <p class="text-muted mb-0"><%= activity.createdAt.toISOString() %></p>
-                                      </div>
-                                      <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                                          <a href="/v1/api/activities/:id" class="btn btn-primary">View More</a>
-                                      </div>
-                                  </div>
-                              <% }); %>
-                          <% } else { %>
-                              <p>No activities logged yet.</p>
-                              <a href="/v1/api/activities/:id" class="btn btn-primary">Add Activity</a>
-                          <% } %>
-                      </div>
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Activity Log</h4>
+                    <% if (activities && activities.length > 0) { %>
+                      <% activities.forEach(function(activity) { %>
+                        <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
+                          <div class="text-md-center text-xl-left">
+                            <h6 class="mb-1"><%= activity.type %></h6>
+                            <p class="text-muted mb-0">Start Weight: <%= activity.startWeight %> kg</p>
+                            <p class="text-muted mb-0">Weight Lost: <%= activity.weightLost %> kg</p>
+                            <% if (activity.notes) { %>
+                              <p class="text-muted mb-0">Notes: <%= activity.notes %></p>
+                            <% } %>
+                          </div>
+                          <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
+                            <a href="/v1/api/activities/:id" class="btn btn-primary">View More</a>
+                          </div>
+                        </div>
+                      <% }); %>
+                    <% } else { %>
+                      <p>No activities logged yet.</p>
+                      <a href="/v1/api/activities/:id" class="btn btn-primary">Add Activity</a>
+                    <% } %>
                   </div>
+                </div>
               </div>
-          </div>
-          
-            <div class="col-md-8 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex flex-row justify-content-between">
-                    <h4 class="card-title mb-1"> WorkOut Plan</h4>
-                    <% if (user) { %> <p class="text-muted mb-1"> Weldone, <%= user %>, Your plan looks Great!</p>
+            
+              <div class="col-md-8 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex flex-row justify-content-between">
+                      <h4 class="card-title mb-1"> WorkOut Plan</h4>
+                      <% if (user) { %> 
+                        <p class="text-muted mb-1"> Weldone, <%= user %>, Your plan looks Great!</p>
                       <% } %>
-                    <!--<p class="text-muted mb-1"></p>-->
-                  </div>
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="preview-list">
-                        <div class="preview-item border-bottom">
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="preview-list">
+                          <div class="preview-item border-bottom">
                             <div class="preview-thumbnail">
                               <div class="preview-icon bg-primary">
-                                <i class="mdi mdi-dumbbell"></i> </div>
+                                <i class="mdi mdi-dumbbell"></i>
+                              </div>
                             </div>
                             <div class="preview-item-content d-sm-flex flex-grow">
                               <% if (workouts && workouts.length > 0) { %>
@@ -525,21 +523,21 @@
                               <% } %>
                             </div>
                           </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            </div>
-        
+            
             <div class="content-body default-height">
               <!-- row -->
         <div class="container-fluid">
           <div class="row">
             <div class="col-xl-6 col-xxl-12">
               <div class="row">
-                <div class="col-sm-6">
+                <div class="col-6">
                   <div class="card avtivity-card">
                     <div class="card-body">
                       <div class="media align-items-center">
@@ -569,7 +567,7 @@
                     <div class="effect bg-success"></div>
                   </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-6">
                   <div class="card avtivity-card">
                     <div class="card-body">
                       <div class="media align-items-center">
@@ -594,7 +592,7 @@
                     <div class="effect bg-secondary"></div>
                   </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-6">
                   <div class="card avtivity-card">
                     <div class="card-body">
                       <div class="media align-items-center">
@@ -620,7 +618,7 @@
                     <div class="effect bg-danger"></div>
                   </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 mb-4">
                   <div class="card avtivity-card">
                     <div class="card-body">
                       <div class="media align-items-center">
@@ -650,16 +648,17 @@
               </div>
             </div>
             
-            <div class="col-xl-9 col-xxl-8">
+            <div class="col-xl-9 col-xxl-8 ">
               <div class="row">
                 <div class="col-xl-12">	
                   <div class="card">
                     <div class="card-header d-sm-flex d-block pb-0 border-0">
                       <div class="me-auto pe-3">
                         <h4 class="text-black font-w600 fs-20">Recomended Trainer for You</h4>
-                        <p class="fs-13 mb-0">Lorem ipsum dolor sit amet, consectetur</p>
+                        <p class="fs-13 mb-0">Meet trainers that are passionate about giving you your dream body</p>
                       </div>
-                      <a href="#" class="btn btn-primary rounded d-none d-md-block">View More</a>
+                      <!--<a href="/v1/api/users/comingSoon" class="btn btn-primary rounded d-none d-md-block">
+                        View More</a>-->
                     </div>
                     <div class="card-body pt-2">
                       <div class="testimonial-one owl-carousel">
@@ -667,7 +666,7 @@
                           <div class="card text-center">
                             <div class="card-body">
                               <img src="img/testimonial/1.jpg" alt="">
-                              <h5 class="fs-16 font-w500 mb-1"><a href="app-profile.html" class="text-black">Roberto Carloz</a></h5>
+                              <h5 class="fs-16 font-w500 mb-1"><a href="/v1/api/users/comingSoon" class="text-black">Roberto Carloz</a></h5>
                               <p class="fs-14">Body Building Trainer</p>
                               <div class="d-flex align-items-center justify-content-center">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http:/www.w3.org/2000/svg">
@@ -683,14 +682,14 @@
                           <div class="card text-center">
                             <div class="card-body">
                               <img src="img/testimonial/2.jpg" alt="">
-                              <h5 class="fs-16 font-w500 mb-1"><a href="app-profile.html" class="text-black">Cindy Moss</a></h5>
+                              <h5 class="fs-16 font-w500 mb-1"><a href="/v1/api/users/comingSoon" class="text-black">Cindy Moss</a></h5>
                               <p class="fs-14">Fat Belly Trainer</p>
                               <div class="d-flex align-items-center justify-content-center">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http:/www.w3.org/2000/svg">
                                   <path d="M5.09569 20C4.80437 19.9988 4.51677 19.9344 4.25273 19.8113C3.98868 19.6881 3.75447 19.5091 3.56624 19.2866C3.37801 19.0641 3.24024 18.8034 3.16243 18.5225C3.08462 18.2415 3.06862 17.9471 3.11554 17.6593L3.88905 12.8902L0.569441 9.45986C0.312024 9.19466 0.132451 8.86374 0.0503661 8.50328C-0.0317185 8.14282 -0.0131526 7.76671 0.104033 7.4161C0.221219 7.06549 0.43251 6.75388 0.714792 6.51537C0.997074 6.27685 1.33947 6.12062 1.70453 6.06376L6.20048 5.37325L8.18158 1.13817C8.34755 0.796915 8.60606 0.509234 8.92762 0.307978C9.24917 0.106721 9.6208 0 10.0001 0C10.3793 0 10.751 0.106721 11.0725 0.307978C11.3941 0.509234 11.6526 0.796915 11.8186 1.13817L13.7931 5.36719L18.2955 6.06376C18.6606 6.12062 19.003 6.27685 19.2852 6.51537C19.5675 6.75388 19.7788 7.06549 19.896 7.4161C20.0132 7.76671 20.0318 8.14282 19.9497 8.50328C19.8676 8.86374 19.688 9.19466 19.4306 9.45986L16.1144 12.8765L16.885 17.66C16.9463 18.0327 16.9014 18.4152 16.7556 18.7635C16.6097 19.1119 16.3687 19.4121 16.0602 19.6297C15.7517 19.8473 15.3882 19.9735 15.0113 19.994C14.6344 20.0144 14.2593 19.9281 13.9292 19.7451L10.0026 17.5635L6.07117 19.7451C5.77302 19.9118 5.43724 19.9996 5.09569 20Z" fill="#FFAA29"/>
                                 </svg>
                                 <span class="fs-14 d-block ms-2 pe-2 me-2 border-end text-black font-w500">4.4</span>
-                                <a href="app-profile.html" class="btn-link fs-14">Send Request</a>
+                                <a href="/v1/api/users/comingSoon" class="btn-link fs-14">Send Request</a>
                               </div>
                             </div>
                           </div>
@@ -699,7 +698,7 @@
                           <div class="card text-center">
                             <div class="card-body">
                               <img src="img/testimonial/3.jpg" alt="">
-                              <h5 class="fs-16 font-w500 mb-1"><a href="app-profile.html" class="text-black">Ivankov Smurz</a></h5>
+                              <h5 class="fs-16 font-w500 mb-1"><a href="/v1/api/users/comingSoon" class="text-black">Ivankov Smurz</a></h5>
                               <p class="fs-14">Sixpack Builder</p>
                               <div class="d-flex align-items-center justify-content-center">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http:/www.w3.org/2000/svg">
@@ -715,14 +714,14 @@
                           <div class="card text-center">
                             <div class="card-body">
                               <img src="img/testimonial/4.jpg" alt="">
-                              <h5 class="fs-16 font-w500 mb-1"><a href="app-profile.html" class="text-black">Louis Simatupang</a></h5>
+                              <h5 class="fs-16 font-w500 mb-1"><a href="/v1/api/users/comingSoon" class="text-black">Louis Simatupang</a></h5>
                               <p class="fs-14">Body Building Trainer</p>
                               <div class="d-flex align-items-center justify-content-center">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http:/www.w3.org/2000/svg">
                                   <path d="M5.09569 20C4.80437 19.9988 4.51677 19.9344 4.25273 19.8113C3.98868 19.6881 3.75447 19.5091 3.56624 19.2866C3.37801 19.0641 3.24024 18.8034 3.16243 18.5225C3.08462 18.2415 3.06862 17.9471 3.11554 17.6593L3.88905 12.8902L0.569441 9.45986C0.312024 9.19466 0.132451 8.86374 0.0503661 8.50328C-0.0317185 8.14282 -0.0131526 7.76671 0.104033 7.4161C0.221219 7.06549 0.43251 6.75388 0.714792 6.51537C0.997074 6.27685 1.33947 6.12062 1.70453 6.06376L6.20048 5.37325L8.18158 1.13817C8.34755 0.796915 8.60606 0.509234 8.92762 0.307978C9.24917 0.106721 9.6208 0 10.0001 0C10.3793 0 10.751 0.106721 11.0725 0.307978C11.3941 0.509234 11.6526 0.796915 11.8186 1.13817L13.7931 5.36719L18.2955 6.06376C18.6606 6.12062 19.003 6.27685 19.2852 6.51537C19.5675 6.75388 19.7788 7.06549 19.896 7.4161C20.0132 7.76671 20.0318 8.14282 19.9497 8.50328C19.8676 8.86374 19.688 9.19466 19.4306 9.45986L16.1144 12.8765L16.885 17.66C16.9463 18.0327 16.9014 18.4152 16.7556 18.7635C16.6097 19.1119 16.3687 19.4121 16.0602 19.6297C15.7517 19.8473 15.3882 19.9735 15.0113 19.994C14.6344 20.0144 14.2593 19.9281 13.9292 19.7451L10.0026 17.5635L6.07117 19.7451C5.77302 19.9118 5.43724 19.9996 5.09569 20Z" fill="#FFAA29"/>
                                 </svg>
                                 <span class="fs-14 d-block ms-2 pe-2 me-2 border-end text-black font-w500">4.4</span>
-                                <a href="app-profile.html" class="btn-link fs-14">Send Request</a>
+                                <a href="/v1/api/users/comingSoon" class="btn-link fs-14">Send Request</a>
                               </div>
                             </div>
                           </div>
@@ -733,74 +732,6 @@
                 </div>
 
             <div class="row">
-              <div class="col-md-6 col-xl-4 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-flex flex-row justify-content-between">
-                      <h4 class="card-title">Messages</h4>
-                      <p class="text-muted mb-1 small">View all</p>
-                    </div>
-                    <div class="preview-list">
-                      <div class="preview-item border-bottom">
-                        <div class="preview-thumbnail">
-                          <img src="/img/faces/face6.jpg" alt="img" class="rounded-circle" />
-                        </div>
-                        <div class="preview-item-content d-flex flex-grow">
-                          <div class="flex-grow">
-                            <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                              <h6 class="preview-subject">Leonard</h6>
-                              <p class="text-muted text-small">5 minutes ago</p>
-                            </div>
-                            <p class="text-muted">Well, it seems to be working now.</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="preview-item border-bottom">
-                        <div class="preview-thumbnail">
-                          <img src="/img/faces/face8.jpg" alt="img" class="rounded-circle" />
-                        </div>
-                        <div class="preview-item-content d-flex flex-grow">
-                          <div class="flex-grow">
-                            <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                              <h6 class="preview-subject">Luella Mills</h6>
-                              <p class="text-muted text-small">10 Minutes Ago</p>
-                            </div>
-                            <p class="text-muted">Well, it seems to be working now.</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="preview-item border-bottom">
-                        <div class="preview-thumbnail">
-                          <img src="/img/faces/face9.jpg" alt="img" class="rounded-circle" />
-                        </div>
-                        <div class="preview-item-content d-flex flex-grow">
-                          <div class="flex-grow">
-                            <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                              <h6 class="preview-subject">Ethel Kelly</h6>
-                              <p class="text-muted text-small">2 Hours Ago</p>
-                            </div>
-                            <p class="text-muted">Please review the tickets</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="preview-item border-bottom">
-                        <div class="preview-thumbnail">
-                          <img src="/img/faces/face11.jpg" alt="img" class="rounded-circle" />
-                        </div>
-                        <div class="preview-item-content d-flex flex-grow">
-                          <div class="flex-grow">
-                            <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                              <h6 class="preview-subject">Herman May</h6>
-                              <p class="text-muted text-small">4 Hours Ago</p>
-                            </div>
-                            <p class="text-muted">Thanks a lot. It was easy to fix it .</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <div class="col-md-6 col-xl-4 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
@@ -825,7 +756,7 @@
                           <div class="preview-item-content d-flex flex-grow">
                             <div class="flex-grow">
                               <div class="d-flex d-md-block d-xl-flex justify-content-between">
-                                <h6 class="preview-subject">Coach Ray</h6>
+                                <h6 class="preview-subject">John Suger</h6>
                                 <p class="text-muted text-small">available 24hrs a day</p>
                               </div>
                               <p class="text-muted">I sure know how to deliver yor dream BODY.</p>
@@ -855,14 +786,14 @@
                         <li>
                           <div class="form-check form-check-primary">
                             <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> 100 Sit Ups </label>
+                              <input class="checkbox" type="checkbox"> update activity log </label>
                           </div>
                           <i class="remove mdi mdi-close-box"></i>
                         </li>
                         <li>
                           <div class="form-check form-check-primary">
                             <label class="form-check-label">
-                              <input class="checkbox" type="checkbox"> 30mins Threadmill </label>
+                              <input class="checkbox" type="checkbox"> don't forget workout plan </label>
                           </div>
                           <i class="remove mdi mdi-close-box"></i>
                         </li>
@@ -900,7 +831,8 @@
           <!-- partial:partials/_footer.html -->
           <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
-              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Catherine&John_Project 2024</span>
+              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">
+                Copyright &copy; 2024 The Train Fitness Co.</span>
             </div>
           </footer>
           <!-- partial -->

@@ -8,6 +8,7 @@ const isLoggedIn = require('../middlewares/isLoggedIn');
 const {
     getUsers,
     dashboard,
+    profile,
     getUserProfile,
     registerUser,
     loginUser,
@@ -34,6 +35,20 @@ router.get("/login", (req, res) => {
   });
 router.post("/login", loginUser);
 router.get('/dashboard', isLoggedIn, dashboard);
+router.get('/profile', isLoggedIn, profile);
+router.get('/comingSoon', (req, res) => {
+  if (isLoggedIn) {
+    res.render('comingSoon', {
+      user: req.session.user.name,
+      roles: req.session.user.roles,
+    });
+  } else {
+    res.redirect('/dashboard'); 
+  }
+});
+router.get("/home", (req, res) => {
+  res.render("home");
+});
 //router.get("/", isAdmin, getUsers);
 router.get("/:id", getUserProfile);
 router.put("/update/:id", isLoggedIn, updateById)
