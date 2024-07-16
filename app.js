@@ -6,6 +6,7 @@ const connectDB = require("./config/dbConfig");
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
+//const connectMongodbSession = require("connect-mongodb-session");
 // to include flash messages
 const flashMiddleware = require("./middlewares/flashMessages");
 // Import routes
@@ -49,6 +50,7 @@ app.use(session({
   saveUninitialized: true,
   //cookie: { secure: false }
   cookie: { secure: true, httpOnly: true, maxAge: oneDay } // Set to true for production (HTTPS)
+  //store: connectMongodbSession
 }));
 
 // Use routes
