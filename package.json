@@ -2,7 +2,7 @@
   "name": "train",
   "version": "1.0.0",
   "description": "a workout training api",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "jest",
     "start": "node server.js",

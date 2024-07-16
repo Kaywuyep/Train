@@ -46,9 +46,9 @@ router.get('/comingSoon', (req, res) => {
     res.redirect('/dashboard'); 
   }
 });
-router.get("/", (req, res) => {
-  res.render("home");
-});
+//router.get("/", (req, res) => {
+  //res.render("home");
+//});
 //router.get("/", isAdmin, getUsers);
 router.get("/:id", getUserProfile);
 router.put("/update/:id", isLoggedIn, updateById)
