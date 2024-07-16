@@ -46,7 +46,7 @@ router.get('/comingSoon', (req, res) => {
     res.redirect('/dashboard'); 
   }
 });
-router.get("/home", (req, res) => {
+router.get("/", (req, res) => {
   res.render("home");
 });
 //router.get("/", isAdmin, getUsers);
