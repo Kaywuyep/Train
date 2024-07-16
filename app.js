@@ -54,6 +54,9 @@ app.use(session({
 }));
 
 // Use routes
+app.get('/', (req, res) => {
+  res.render('home');
+});
 app.use('/v1/api/users', userRouter);
 app.use('/v1/api/activities', activityRouter);
 app.use('/v1/api/workout', workoutRouter);
