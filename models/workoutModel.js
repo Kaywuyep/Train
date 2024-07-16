@@ -13,6 +13,7 @@ const workoutSchema = new mongoose.Schema({
         // required: true
     },
     name: {
+        unique: true,
         type: String,
         trim: true,
         maxlength: [40, 'A workout name must be less than or equal to 40 characters'],
