@@ -27,7 +27,7 @@ body {
     margin: 0;
     padding: 0 10px;
     font-family: Arial, sans-serif;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 body::before {
@@ -217,4 +217,19 @@ button:hover {
 .bottom-link a {
     color: blue;
     text-decoration: none;
+}
+
+.btn-home {
+  display: block;
+  text-align: center;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.btn-home:hover {
+  background-color: #0056b3;
 }

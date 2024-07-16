@@ -26,7 +26,6 @@
                                         <div class="card-body px-3 py-3">
                                             <!--<h2 class="mt-8">SIGNUP</h2>-->
                                             <form action="/v1/api/users/signup" method="POST">
-                                                
                                                 <div class="input-field">
                                                     <input type="text" name="username" required>
                                                     <label>Enter your username</label>
@@ -46,7 +45,6 @@
                                                 <div class="input-field">
                                                     <select name="roles" required>
                                                         <option value="user">User</option>
-                                                        <option value="admin">Admin</option>
                                                         <option value="trainer">Trainer</option>
                                                     </select>
                                                     <label class="mr-8">role</label>
@@ -61,6 +59,7 @@
                                                 </div>
                                                 <button type="submit" class="btn btn-signup mb-4">Sign Up</button>
                                             </form>
+                                            <a href="/" class="btn btn-home">Home</a> <!-- Home button added -->
                                         </div>
                                     </div>
                                 </div>
@@ -71,5 +70,6 @@
             </div>
         </div>
     </div>
+    
 </body>
 </html>
