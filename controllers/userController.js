@@ -245,7 +245,8 @@ const deleteUsers = async (req, res) => {
         // Delete related documents
         await Workout.deleteMany({ userId });
         await Activity.deleteMany({ userId });
-        await RemGoal.deleteMany({ userId });
+        await Reminder.deleteMany({ userId });
+        await Goal.deleteMany({ userId });
         res.redirect("/v1/api/users/signup")
 
         //res.status(200).json({ message: "User successfully deleted!"});
