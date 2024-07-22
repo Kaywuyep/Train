@@ -1,9 +1,11 @@
 const User = require("../models/usermodel");
 const Workout = require("../models/workoutModel");
 const Activity = require("../models/activityTrackerModel");
+const Goal = require("../models/goalModel");
+const Reminder = require("../models/reminderModel")
 const bcrypt = require("bcrypt");
 //const bcrypt = require("bcrypt");
-const generateToken = require("../utils/generatetoken");
+//const generateToken = require("../utils/generatetoken");
 
 
 const getUsers = async (req, res) => {
@@ -50,14 +52,23 @@ const getUserProfile = async (req, res) => {
         const activityIds = req.session.user.activities;
         const activities = await Activity.find({ _id: { $in: activityIds } });
 
+        const goalIds = req.session.user.goal;
+        const goals = await Goal.find({ _id: { $in: goalIds } });
+        
+        const reminderIds = req.session.user.reminder;
+        const reminders = await Reminder.find({ _id: { $in: reminderIds } });
+
+        // console.log(reminders); // Log the goals data
         res.render('dashboard', {
+            reminders: reminders,
+            goals: goals,
             workouts: workouts, 
             activities: activities,
             user: req.session.user.name,
             roles: req.session.user.roles, 
         });
     } catch (error) {
-        console.log({message: "Error fetching workouts"});
+        console.log({message: "Error fetching user data"});
         res.redirect('/v1/api/users/login');
     }
 };
@@ -152,7 +163,7 @@ const loginUser = async (req, res) => {
         //console.log("Password Match Result:", isPasswordMatch);
 
         if (isPasswordMatch) {
-            const token = generateToken(user._id);
+            //const token = generateToken(user._id);
             //console.log({session_token: token })
             //req.session.user = { name: user.username, roles: user.roles, token };
             req.session.user = {
@@ -162,10 +173,12 @@ const loginUser = async (req, res) => {
             email: user.email,
             phone: user.phone,
             workouts: user.workoutTrack,
-            activities: user.activityTrack
+            activities: user.activityTrack,
+            goals: user.goal,
+            reminders: user.reminder,
             };
             
-            //console.log("Session User Object:", req.session.user);
+            console.log("Session User Object:", req.session.user);
             res.redirect("/v1/api/users/dashboard");
         } else {
             res.redirect("/v1/api/users/login")
@@ -216,6 +229,7 @@ const deleteUsers = async (req, res) => {
         // Delete related documents
         await Workout.deleteMany({ userId });
         await Activity.deleteMany({ userId });
+        await RemGoal.deleteMany({ userId });
         res.redirect("/v1/api/users/signup")
 
         //res.status(200).json({ message: "User successfully deleted!"});

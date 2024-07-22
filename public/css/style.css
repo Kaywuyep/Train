@@ -11403,6 +11403,12 @@ input[type="button"].btn-block {
     .navbar-dark .navbar-text a:hover, .navbar-dark .navbar-text a:focus {
       color: #fff; }
 
+
+.text-success span {
+  font-size: 2em; /* Increase font size for bigger emoji */
+  color: yellow;  /* Set color to yellow */
+}
+
 .card {
   position: relative;
   display: flex;

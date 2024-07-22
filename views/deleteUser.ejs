@@ -504,14 +504,14 @@
 
                 if (response.ok) {
                     alert('User account successfully deleted.');
-                    window.location.href = '/v1/api/users/login'; // Redirect to logout or another appropriate page
+                    window.location.href = '/v1/api/users/signup'; // Redirect to logout or another appropriate page
                 } else {
                     const errorData = await response.json();
                     alert(`Error: ${errorData.message}`);
                 }
             } catch (error) {
                 console.error('Error deleting user:', error);
-                alert('An error occurred while deleting the account.');
+                //alert('An error occurred while deleting the account.');
             }
 
             document.getElementById('overlay').style.display = 'none';

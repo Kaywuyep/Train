@@ -1,6 +1,5 @@
 const express = require("express");
 const User = require("../models/usermodel");
-const axios = require('axios');
 const router = express.Router();
 //const isAdmin = require('../middlewares/isAdmin');
 //const isTrainer = require('../middlewares/isTrainer');
@@ -16,7 +15,15 @@ const {
     deleteUsers,
     logout
 } = require("../controllers/userController");
-const getWorkouts = require('../models/workoutModel');
+const {
+  reminder,
+  setGoal,
+  achieved,
+  notifications,
+  getGoal,
+  updateNotificationId
+} = require('../controllers/mailBadgecCtrl');
+
 
 
 router.get("/signup", (req, res) => {
@@ -62,10 +69,17 @@ router.get("/delete/:id", (req, res) => {
     //error_msg: req.flash('error_msg')
   });
 } else {
-  res.redirect('/login');
+  res.redirect('/signup');
 }
 });
 router.get("/logout", isLoggedIn, logout);
+router.post('/reminder', isLoggedIn, reminder);
+router.get('/:id/reminder', isLoggedIn, reminder);
+router.post('/goal', isLoggedIn, setGoal);
+router.post('/goal/:goalId/achieve/', isLoggedIn, achieved)
+router.get('/notification', isLoggedIn, notifications);
+router.put('/reminder/:notificationId', isLoggedIn, updateNotificationId);
+router.get("/goal/:id", isLoggedIn, getGoal);
 
 
 module.exports = router;

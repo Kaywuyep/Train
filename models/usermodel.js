@@ -33,6 +33,16 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
       },
+    reminder: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Reminder',
+    }],
+    goal: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Goal',
+    }],
     activityTrack: [
       {
         type: mongoose.Schema.Types.ObjectId,

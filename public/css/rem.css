@@ -1,0 +1,21 @@
+/* Notification Count Style */
+#notification-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    color: #fff;
+  }
+  
+  /* Notification Dropdown Style */
+  #notification-list {
+    max-height: 400px;
+    overflow-y: auto;
+    width: 300px;
+  }
+  

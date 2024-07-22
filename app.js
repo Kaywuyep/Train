@@ -13,6 +13,8 @@ const flashMiddleware = require("./middlewares/flashMessages");
 const userRouter = require('./routes/userRoutes');
 const activityRouter = require('./routes/activityRoute');
 const workoutRouter = require('./routes/workoutRoute');
+const { getUserProfile } = require('./controllers/userController');
+//const remRouter = require('./routes/remGoalRoute');
 
 const oneDay = 24 * 60 * 60 * 1000;
 
@@ -57,9 +59,11 @@ app.use(session({
 app.get('/', (req, res) => {
   res.render('home');
 });
+//app.use('/v1/api/reminder', remRouter);
 app.use('/v1/api/users', userRouter);
 app.use('/v1/api/activities', activityRouter);
 app.use('/v1/api/workout', workoutRouter);
+
 
 
 module.exports= app;
