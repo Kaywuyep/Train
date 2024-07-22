@@ -52,7 +52,7 @@ async function fetchNotifications() {
     }
     const notifications = await response.json();
 
-    console.log('Notifications fetched:', notifications);
+    //console.log('Notifications fetched:', notifications);
 
     const reminders = notifications.reminder || [];
     const goals = notifications.goal || [];
