@@ -13,7 +13,7 @@ const flashMiddleware = require("./middlewares/flashMessages");
 const userRouter = require('./routes/userRoutes');
 const activityRouter = require('./routes/activityRoute');
 const workoutRouter = require('./routes/workoutRoute');
-const { getUserProfile } = require('./controllers/userController');
+//const { getUserProfile } = require('./controllers/userController');
 //const remRouter = require('./routes/remGoalRoute');
 
 const oneDay = 24 * 60 * 60 * 1000;

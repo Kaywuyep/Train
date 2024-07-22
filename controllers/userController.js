@@ -83,14 +83,17 @@ const getUserProfile = async (req, res) => {
 
 const profile = async (req, res) => {
     try {
-        const workoutIds = req.session.user.workouts;
-        const workouts = await Workout.find({ _id: { $in: workoutIds } });
-        const activityIds = req.session.user.activities;
-        const activities = await Activity.find({ _id: { $in: activityIds } });
+        const userId = req.session.user && req.session.user.id?.toString();
+        //const workoutIds = req.session.user.workouts;
+        //const workouts = await Workout.find({ _id: { $in: workoutIds } });
+        const user = await User
+        .findById(userId)
+        .populate('workoutTrack')
+        .populate('activityTrack');
 
         res.render('profile', {
-            workouts: workouts, 
-            activities: activities,
+            workouts: user.workoutTrack, 
+            activities: user.activityTrack,
             user: req.session.user.name,
             roles: req.session.user.roles,
             email: req.session.user.email,
@@ -152,7 +155,8 @@ const loginUser = async (req, res) => {
         // Check if username exists
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ message: 'email cannot be found' });
+            return res.redirect('/v1/api/users/signup')
+            //return res.status(400).json({ message: 'email cannot be found' });
         }
 
         // Log retrieved user information for debugging
@@ -161,12 +165,16 @@ const loginUser = async (req, res) => {
         // Ensure password is provided
         if (!password) {
             console.log("Password not provided");
-            return res.status(400).json({ message: 'Password not provided' });
+            return res.redirect('/v1/api/users/login')
+            //return res.status(400).json({ message: 'Password not provided' });
         }
 
         // Compare the hashed password from the db
         const isPasswordMatch = await bcrypt.compare(password, user.password);
-        
+        if (!isPasswordMatch) {
+            return res.redirect('/v1/api/users/login')
+        }
+
         // Log password comparison results for debugging
         //console.log("Password Match Result:", isPasswordMatch);
 
