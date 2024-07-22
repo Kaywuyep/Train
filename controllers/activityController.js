@@ -81,7 +81,7 @@ const createActivity = async (req, res) => {
       //console.log(activity);
   
   
-        res.redirect("/v1/api/activities/:id")
+        res.redirect("/v1/api/users/dashboard")
         //res.status(201).json({ message: "Workout successfully created!", workout, user: updatedUser });
       } catch (error) {
         console.log({ message: error.message});

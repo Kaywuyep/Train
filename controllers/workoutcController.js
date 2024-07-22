@@ -92,17 +92,20 @@ const createWorkout = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     // Update session user object (if applicable)
+    //if (req.session && req.session.user) {
+      //if (!req.session.user.workoutTrack) {
+        //req.session.user.workoutTrack = [];
+      //}
+      //req.session.user.workoutTrack.push(workout._id);
+    //}
     if (req.session && req.session.user) {
-      if (!req.session.user.workoutTrack) {
-        req.session.user.workoutTrack = [];
-      }
-      req.session.user.workoutTrack.push(workout._id);
+      req.session.user.workoutTrack = updatedUser.workoutTrack;
     }
 
     //console.log(workout);
 
 
-      res.redirect("/v1/api/workout/:id")
+      res.redirect("/v1/api/users/dashboard")
       //res.status(201).json({ message: "Workout successfully created!", workout, user: updatedUser });
     } catch (error) {
       console.log({ message: error.message});

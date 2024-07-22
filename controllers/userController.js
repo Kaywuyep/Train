@@ -47,23 +47,31 @@ const getUserProfile = async (req, res) => {
 
   const dashboard = async (req, res) => {
     try {
-        const workoutIds = req.session.user.workouts;
-        const workouts = await Workout.find({ _id: { $in: workoutIds } });
-        const activityIds = req.session.user.activities;
-        const activities = await Activity.find({ _id: { $in: activityIds } });
-
-        const goalIds = req.session.user.goal;
-        const goals = await Goal.find({ _id: { $in: goalIds } });
+        const userId = req.session.user && req.session.user.id?.toString();
+        //const workoutIds = req.session.user.workouts;
+        //const workouts = await Workout.find({ _id: { $in: workoutIds } });
+        const user = await User
+        .findById(userId)
+        .populate('workoutTrack')
+        .populate('activityTrack')
+        .populate('goal')
+        .populate('reminder');
+        //const activityIds = req.session.user.activities;
+        //const activities = await Activity.find({ _id: { $in: activityIds } });
         
-        const reminderIds = req.session.user.reminder;
-        const reminders = await Reminder.find({ _id: { $in: reminderIds } });
+        //const goalIds = req.session.user.goal;
+        //const goals = await Goal.find({ _id: { $in: goalIds } });
+        
+        //const reminderIds = req.session.user.reminder;
+        //const reminders = await Reminder.find({ _id: { $in: reminderIds } });
 
         // console.log(reminders); // Log the goals data
         res.render('dashboard', {
-            reminders: reminders,
-            goals: goals,
-            workouts: workouts, 
-            activities: activities,
+            reminders: user.reminder,
+            goals: user.goal,
+            //workouts: workouts,
+            workouts: user.workoutTrack, 
+            activities: user.activityTrack,
             user: req.session.user.name,
             roles: req.session.user.roles, 
         });
