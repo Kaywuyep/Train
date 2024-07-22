@@ -176,7 +176,10 @@ const notifications = async (req, res) => {
       }
 
       // Fetch the user with populated reminders and goals
-      const user = await User.findById(userId).populate('reminders').populate('goals');
+      const user = await User.findById(userId).populate('reminder').populate('goal');
+      //const reminders = await Reminder.find({ userId: userId, sent: false });
+      //const reminders = user.reminder.filter(reminder => !reminder.sent);
+      //res.json({ reminder: reminders, goal: user.goal });
       if (!user) {
         return res.status(404).send('User not found');
       }
@@ -186,8 +189,8 @@ const notifications = async (req, res) => {
         //goals: user.goal,
       //};
       res.status(200).json({
-        reminders: user.reminders,
-        goals: user.goals,
+        reminders: user.reminder,
+        goals: user.goal,
       });
 
       //console.log(notifications);

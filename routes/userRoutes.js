@@ -72,7 +72,15 @@ router.get("/delete/:id", (req, res) => {
   res.redirect('/signup');
 }
 });
-router.get("/logout", isLoggedIn, logout);
+router.get("/logout", (req, res) => {
+  if (isLoggedIn) {
+  res.render("login", {
+    success_msg: req.flash('success_msg'),
+    error_msg: req.flash('error_msg')
+  });
+}
+});
+router.post("/logout", isLoggedIn, logout);
 router.post('/reminder', isLoggedIn, reminder);
 router.get('/:id/reminder', isLoggedIn, reminder);
 router.post('/goal', isLoggedIn, setGoal);

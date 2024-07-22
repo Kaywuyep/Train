@@ -327,16 +327,20 @@
                   <h6 class="p-3 mb-0">Profile</h6>
                   <div class="dropdown-divider"></div>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item" href="/v1/api/users/logout">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-logout text-danger"></i>
+                  <form id="logoutForm" action="/v1/api/users/logout" method="POST" style="display: none;">
+                  </form>
+                  
+                  <a class="dropdown-item preview-item" href="#" onclick="document.getElementById('logoutForm').submit();">
+                      <div class="preview-thumbnail">
+                          <div class="preview-icon bg-dark rounded-circle">
+                              <i class="mdi mdi-logout text-danger"></i>
+                          </div>
                       </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Log out</p>
-                    </div>
+                      <div class="preview-item-content">
+                          <p class="preview-subject mb-1">Log out</p>
+                      </div>
                   </a>
+                  
               </li>
             </ul>
             <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">

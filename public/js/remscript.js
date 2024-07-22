@@ -46,14 +46,13 @@ document.addEventListener('DOMContentLoaded', () => {
 async function fetchNotifications() {
   console.log('Fetching notifications...');
   try {
-    const response = await fetch(`/v1/api/users/notification`);
+    const response = await fetch('/v1/api/users/notification');
     if (!response.ok) {
       throw new Error('Failed to fetch notifications');
     }
     const notifications = await response.json();
 
     console.log('Notifications fetched:', notifications);
-    //console.log('Notifications fetched:', 'good work');
 
     const reminders = notifications.reminder || [];
     const goals = notifications.goal || [];
@@ -67,6 +66,7 @@ async function fetchNotifications() {
     reminders.forEach(reminder => {
       console.log('Processing reminder:', reminder);
       if (new Date() >= new Date(reminder.date) && !reminder.sent) {
+        console.log('Adding reminder to notificationsHTML:', reminder);
         notificationsHTML += `
           <a class="dropdown-item preview-item">
             <div class="preview-thumbnail">
@@ -77,10 +77,10 @@ async function fetchNotifications() {
             <div class="preview-item-content">
               <p class="preview-subject mb-1">Reminder</p>
               <p class="text-muted ellipsis mb-0">${reminder.message}</p>
+              <button class="btn btn-sm btn-primary mark-as-read" data-id="${reminder._id}">Mark as read</button>
             </div>
           </a>
           <div class="dropdown-divider"></div>`;
-        updateReminder(reminder._id); // Mark reminder as sent
         notificationCount++;
       }
     });
@@ -104,14 +104,10 @@ async function fetchNotifications() {
         notificationCount++;
       }
     });
-    console.log(notificationsHTML);
 
     console.log('Notifications HTML:', notificationsHTML);
     const notificationList = document.getElementById('notification-elements');
     const notificationCountElement = document.getElementById('notification-count');
-
-    //console.log('Notification list element:', notificationList);
-    //console.log('Notification count element:', notificationCountElement);
     
     if (notificationList) {
       notificationList.innerHTML = notificationsHTML;
@@ -125,20 +121,32 @@ async function fetchNotifications() {
       console.error('Notification count element not found');
     }
 
+    document.querySelectorAll('.mark-as-read').forEach(button => {
+      button.addEventListener('click', markAsRead);
+    });
+
   } catch (error) {
     console.error('Error fetching notifications:', error);
   }
 }
 
-async function updateReminder(notificationId) {
+async function markAsRead(event) {
+  const reminderId = event.target.dataset.id;
   try {
-    await fetch(`/v1/api/users/reminder/${notificationId}`, {
+    const response = await fetch(`/v1/api/users/reminder/${reminderId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ sent: true }),
     });
-    console.log(`Reminder ${notificationId} marked as sent`); // Log reminder update
+    if (response.ok) {
+      console.log(`Reminder ${reminderId} marked as read`);
+      fetchNotifications();
+    } else {
+      console.error('Failed to mark reminder as read');
+    }
   } catch (error) {
-    console.error('Error updating reminder:', error);
+    console.error('Error marking reminder as read:', error);
   }
 }
+
+document.addEventListener('DOMContentLoaded', fetchNotifications);

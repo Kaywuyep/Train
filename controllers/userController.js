@@ -256,16 +256,21 @@ const deleteUsers = async (req, res) => {
 };
 
 const logout = (req, res) => {
+    //console.log('Logout function called');
     req.session.destroy((err) => {
-      if (err) {
-        console.error(err); // Handle session destruction error
-        return res.status(500).json({ message: "Error logging out" });
-      }
+        if (err) {
+            console.error('Session destruction error:', err); // Log the error for debugging
+            return res.status(500).json({ message: "Error logging out" });
+        }
 
-      res.redirect("/v1/api/users/login");
-      //res.status(200).json({ message: "Logged out successfully" });
+        //console.log('Session destroyed, clearing cookie and redirecting');
+        res.clearCookie('connect.sid'); // Ensure the session cookie is cleared
+        // console.log('done clearing and ready to redirect')
+        res.redirect("/v1/api/users/login");
     });
 };
+
+
 
 module.exports = {
     dashboard,
